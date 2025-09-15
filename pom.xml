@@ -17,6 +17,7 @@
         <maven.compiler.target>19</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <bellatrix.version>1.0-SNAPSHOT</bellatrix.version>
+        <lombok.version>1.18.30</lombok.version>
     </properties>
 
     <modules>
@@ -38,6 +39,13 @@
                 <artifactId>bellatrix.core</artifactId>
                 <version>${bellatrix.version}</version>
             </dependency>
+            <!-- Lombok -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>provided</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -51,6 +59,13 @@
                     <configuration>
                         <source>19</source>
                         <target>19</target>
+                        <annotationProcessorPaths>
+                            <path>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                                <version>${lombok.version}</version>
+                            </path>
+                        </annotationProcessorPaths>
                     </configuration>
                 </plugin>
                 <plugin>
