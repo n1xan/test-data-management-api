@@ -1,0 +1,31 @@
+{
+  "troubleshootingSettings": {
+    "debugInformationEnabled": "true"
+  },
+  "dataSettings": {
+    "dataSourceType": "HTTP",
+    "httpSettings": {
+      "baseUrl": "https://api.trello.com/1",
+      "basePath": "",
+      "urlEncoderEnabled": "true",
+      "contentType": "application/json",
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "method": "QueryParameters",
+        "options": [
+          {
+            "type": "QueryParameters",
+            "insertionOrder": "start",
+            "key": "{env_trello_api_key}",
+            "token": "{env_trello_api_token}"
+          }
+        ]
+      }
+    }
+  }
+}
