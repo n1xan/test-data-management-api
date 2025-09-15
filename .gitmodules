@@ -1,0 +1,3 @@
+[submodule "bellatrix-java"]
+	path = bellatrix-java
+	url = https://github.com/AutomateThePlanet/BELLATRIX-Java.git
