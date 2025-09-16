@@ -1,22 +1,14 @@
 package board;
 
-import com.google.gson.FieldNamingPolicy;
-import solutions.bellatrix.core.configuration.ConfigurationService;
-import solutions.bellatrix.data.configuration.DataSettings;
-import solutions.bellatrix.data.http.httpContext.HttpContext;
-import solutions.bellatrix.data.http.infrastructure.HttpRepository;
-import solutions.bellatrix.data.http.infrastructure.JsonConverter;
+import base.BaseTrelloRepository;
 
-public class BoardRepository extends HttpRepository<Board> {
+/**
+ * Repository for Board entities
+ * Extends BaseTrelloRepository with board-specific path parameter
+ */
+public class BoardRepository extends BaseTrelloRepository<Board> {
     
     public BoardRepository() {
-        super(Board.class, new JsonConverter(builder -> {
-            builder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES);
-        }), () -> {
-            var httpSettings = ConfigurationService.get(DataSettings.class).getHttpSettings();
-            var httpContext = new HttpContext(httpSettings);
-            httpContext.addPathParameter("boards");
-            return httpContext;
-        });
+        super(Board.class, "boards");
     }
 }
