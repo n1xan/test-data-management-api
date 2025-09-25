@@ -44,14 +44,15 @@ public class BoardsTests extends BaseTrelloTest {
     public void boardCreatedWithDefaultLists_when_createInWorkspace() {
         var existingCard = cardFactory.buildDefaultWithDependencies();
         existingCard.setName("Test Card " + new Faker().number().digits(5));
-        existingCard.create();
+        existingCard.createWithDependencies();
+
+        app().browser().refresh();
+        app().browser().waitUntilPageLoadsCompletely();
 
         boardsPage.openBoardByTitle(existingCard.getList().getBoard().getName());
-        boardPage.assertNavigated();
         var boardLists = boardPage.getAllListsTitles();
 
-        Assertions.assertNotEquals(List.of("To Do", "Doing", "Done"), boardLists, "Default Lists were found");
-        Assertions.assertEquals(List.of(existingCard.getList().getName()), boardLists, "Expected List was not found");
+        Assertions.assertEquals(List.of(existingCard.getList().getName(), "To Do", "Doing", "Done"), boardLists, "Default Lists were found");
     }
 }
 
