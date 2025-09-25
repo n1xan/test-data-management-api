@@ -1,13 +1,18 @@
 package base;
 
 import board.Board;
+import board.BoardRepository;
 import board.BoardRepositoryFactory;
 import card.Card;
+import card.CardRepository;
 import card.CardRepositoryFactory;
 import list.List;
+import list.ListRepository;
 import list.ListRepositoryFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import solutions.bellatrix.data.configuration.FactoryProvider;
+import solutions.bellatrix.data.configuration.RepositoryProvider;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -34,8 +39,23 @@ public abstract class BaseTrelloTest {
         boardFactory = new BoardRepositoryFactory();
         listFactory = new ListRepositoryFactory();
         cardFactory = new CardRepositoryFactory();
+
+        registerRepositoriesAndFactories();
     }
-    
+
+    private static void registerRepositoriesAndFactories() {
+        // Register the factories
+        FactoryProvider.INSTANCE.register(Card.class, CardRepositoryFactory.class);
+        FactoryProvider.INSTANCE.register(List.class, ListRepositoryFactory.class);
+        FactoryProvider.INSTANCE.register(Board.class, BoardRepositoryFactory.class);
+
+        // Register the repositories
+        RepositoryProvider.INSTANCE.register(Card.class, CardRepository.class);
+        RepositoryProvider.INSTANCE.register(List.class, ListRepository.class);
+        RepositoryProvider.INSTANCE.register(Board.class, BoardRepository.class);
+    }
+
+
     @AfterEach
     public void tearDown() {
         // Clean up test data in reverse dependency order

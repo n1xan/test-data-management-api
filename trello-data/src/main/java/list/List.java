@@ -14,6 +14,10 @@ import solutions.bellatrix.data.http.infrastructure.HttpEntity;
 public class List extends HttpEntity<String, List> {
     
     // Core identification fields
+
+    @Dependency(entityType = Board.class)
+    private transient Board board;
+
     @SerializedName("id")
     private String id;
     
@@ -32,7 +36,6 @@ public class List extends HttpEntity<String, List> {
     
     // Board reference
     @SerializedName("idBoard")
-    @Dependency(entityType = Board.class)
     private String idBoard;
     
     // URL fields
@@ -54,9 +57,23 @@ public class List extends HttpEntity<String, List> {
     
     @SerializedName("limits")
     private Object limits;
-    
+
+
+    // Required identity fields
     @Override
     public String getIdentifier() {
         return id;
+    }
+
+    @Override
+    public void setIdentifier(String id) {
+        this.id = id;
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
+        if (board.getId() != null) {
+            this.setIdBoard(board.getId());
+        }
     }
 }

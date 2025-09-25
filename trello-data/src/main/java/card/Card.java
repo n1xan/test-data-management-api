@@ -1,5 +1,6 @@
 package card;
 
+import lombok.Getter;
 import solutions.bellatrix.data.annotations.Dependency;
 import list.List;
 import com.google.gson.annotations.SerializedName;
@@ -12,8 +13,11 @@ import solutions.bellatrix.data.http.infrastructure.HttpEntity;
 @SuperBuilder
 @EqualsAndHashCode(callSuper = true)
 public class Card extends HttpEntity<String, Card> {
-    
     // Core identification fields
+    @Dependency(entityType = List.class)
+    @Getter
+    private transient List list;
+
     @SerializedName("id")
     private String id;
     
@@ -38,7 +42,6 @@ public class Card extends HttpEntity<String, Card> {
     private String idBoard;
     
     @SerializedName("idList")
-    @Dependency(entityType = List.class)
     private String idList;
     
     // URL fields
@@ -50,9 +53,22 @@ public class Card extends HttpEntity<String, Card> {
     
     @SerializedName("shortLink")
     private String shortLink;
-    
+
+    // Required identity fields
     @Override
     public String getIdentifier() {
         return id;
+    }
+
+    @Override
+    public void setIdentifier(String id) {
+        this.id = id;
+    }
+
+    public void setList(List list) {
+        this.list = list;
+        if (list.getId() != null) {
+            this.setIdList(list.getId());
+        }
     }
 }

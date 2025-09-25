@@ -1,7 +1,10 @@
 package card;
 
+import list.List;
+import list.ListRepository;
+import solutions.bellatrix.data.configuration.RepositoryProvider;
 import solutions.bellatrix.data.http.contracts.EntityFactory;
-import solutions.bellatrix.data.configuration.RepositoryFactory;
+import solutions.bellatrix.data.configuration.FactoryProvider;
 
 /**
  * Factory for Card entities
@@ -10,8 +13,6 @@ import solutions.bellatrix.data.configuration.RepositoryFactory;
 public class CardRepositoryFactory implements EntityFactory<Card> {
     
     public CardRepositoryFactory() {
-        // Register the Card repository with the factory on instantiation
-        RepositoryFactory.INSTANCE.registerRepository(Card.class, CardRepository.class);
     }
     
     @Override

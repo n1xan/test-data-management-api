@@ -6,7 +6,6 @@ import com.trello.pages.boards.BoardsPage;
 import com.trello.pages.login.LoginPage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import solutions.bellatrix.web.components.Anchor;
 import solutions.bellatrix.web.infrastructure.Browser;
 import solutions.bellatrix.web.infrastructure.ExecutionBrowser;
 import solutions.bellatrix.web.infrastructure.Lifecycle;
@@ -43,14 +42,16 @@ public class BoardsTests extends BaseTrelloTest {
 
     @Test
     public void boardCreatedWithDefaultLists_when_createInWorkspace() {
-        var existingCart = cardFactory.createWithDependencies();
-        existingCart.setName("Test Card " + new Faker().number().digits(5));
-        existingCart.create();
+        var existingCard = cardFactory.buildDefaultWithDependencies();
+        existingCard.setName("Test Card " + new Faker().number().digits(5));
+        existingCard.create();
 
-
-        boardsPage.openBoardByTitle(existingCart.getName());
+        boardsPage.openBoardByTitle(existingCard.getList().getBoard().getName());
+        boardPage.assertNavigated();
         var boardLists = boardPage.getAllListsTitles();
+
         Assertions.assertNotEquals(List.of("To Do", "Doing", "Done"), boardLists, "Default Lists were found");
+        Assertions.assertEquals(List.of(existingCard.getList().getName()), boardLists, "Expected List was not found");
     }
 }
 

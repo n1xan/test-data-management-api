@@ -1,7 +1,8 @@
 package list;
 
+import solutions.bellatrix.data.configuration.RepositoryProvider;
 import solutions.bellatrix.data.http.contracts.EntityFactory;
-import solutions.bellatrix.data.configuration.RepositoryFactory;
+import solutions.bellatrix.data.configuration.FactoryProvider;
 
 /**
  * Factory for List entities
@@ -10,8 +11,6 @@ import solutions.bellatrix.data.configuration.RepositoryFactory;
 public class ListRepositoryFactory implements EntityFactory<List> {
     
     public ListRepositoryFactory() {
-        // Register the List repository with the factory on instantiation
-        RepositoryFactory.INSTANCE.registerRepository(List.class, ListRepository.class);
     }
     
     @Override

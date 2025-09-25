@@ -1,11 +1,8 @@
 package tests.trello.data;
 
-import board.Board;
-import card.Card;
 import com.trello.pages.board.BoardPage;
 import com.trello.pages.boards.BoardsPage;
 import com.trello.pages.login.LoginPage;
-import list.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import solutions.bellatrix.web.infrastructure.Browser;
@@ -40,7 +37,7 @@ public class FactoryPatternTests extends BaseTrelloTest {
     @Test
     public void factoryWithDependencyResolution_when_creatingComplexStructure() {
         // Demonstrate using factory with dependency resolution
-        var board = boardFactory.createWithDependencies();
+        var board = boardFactory.buildDefaultWithDependencies();
         board.setName("Dependency Resolution Board " + System.currentTimeMillis());
         board.create();
 

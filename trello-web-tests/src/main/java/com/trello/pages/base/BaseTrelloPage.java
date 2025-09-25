@@ -10,7 +10,7 @@ public class BaseTrelloPage extends WebPage {
     }
 
     private String getUser() {
-        return "nikolay97110466";
+        return                                                                                                                                                                              "nikolay97110466";
     }
 
     public void assertNavigated() {

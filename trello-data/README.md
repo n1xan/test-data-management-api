@@ -114,11 +114,12 @@ public class ListRepository extends HttpRepository<List> {
 ```
 
 ### 4. Create Factory Class
+
 ```java
 package list;
 
 import solutions.bellatrix.core.utilities.SingletonFactory;
-import solutions.bellatrix.data.configuration.RepositoryFactory;
+import solutions.bellatrix.data.configuration.FactoryProvider;
 import solutions.bellatrix.data.contracts.Repository;
 
 import java.util.Map;
@@ -132,7 +133,7 @@ public enum ListRepositoryFactory {
 
     public void registerListRepository() {
         repositories.put(List.class, ListRepository.class);
-        RepositoryFactory.INSTANCE.registerRepository(List.class, ListRepository.class);
+        FactoryProvider.INSTANCE.registerRepository(List.class, ListRepository.class);
     }
 
     public ListRepository getListRepository() {

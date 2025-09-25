@@ -11,4 +11,10 @@ public class BoardRepository extends BaseTrelloRepository<Board> {
     public BoardRepository() {
         super(Board.class, "boards");
     }
+
+    @Override
+    public void delete(Board entity) {
+        entity.setClosed(true);
+        super.update(entity);
+    }
 }

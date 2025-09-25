@@ -50,9 +50,15 @@ public class Board extends HttpEntity<String, Board> {
     
     @SerializedName("idMemberCreator")
     private String idMemberCreator;
-    
+
+    // Required identity fields
     @Override
     public String getIdentifier() {
         return id;
+    }
+
+    @Override
+    public void setIdentifier(String id) {
+        this.id = id;
     }
 }

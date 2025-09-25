@@ -3,7 +3,9 @@ package card;
 import board.Board;
 import list.List;
 import base.BaseTrelloTest;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import solutions.bellatrix.data.configuration.RepositoryProvider;
 
 public class CardTest extends BaseTrelloTest {
 
@@ -19,7 +21,7 @@ public class CardTest extends BaseTrelloTest {
         // Create card using default state from factory with list ID
         Card card = cardFactory.buildDefault(testList.getId()).create();
         trackCard(card.getId());
-        
+
         // Retrieve and verify card properties
         card = card.get();
         assert card.getId() != null;
@@ -49,4 +51,38 @@ public class CardTest extends BaseTrelloTest {
             assert card.getDescription().equals(updatedDescription);
         }
     }
+
+    @Test
+    public void cardDependencyDefaultTest() {
+        // Build card with dependencies using factory
+        Card card = cardFactory.buildDefault();
+        card.createWithDependencies();
+
+        Assertions.assertNotNull(card.getId());
+        Assertions.assertNotNull(card.getList().getId());
+        Assertions.assertNotNull(card.getList().getBoard().getId());
+
+        card.deleteDependenciesAndSelf();
+    }
+
+    @Test
+    public void cardDependencyCustomizedTest() {
+        String expectedListName = "New List " + System.currentTimeMillis();
+        String expectedCardName = "New Card";
+        String expectedBoardName = "New Board";
+
+        // Build card with dependencies using factory
+        Card card = cardFactory.buildDefaultWithDependencies();
+
+        // Adjust test data across dependency chain according to the test case
+        card.setName(expectedCardName);
+        card.getList().setName(expectedListName);
+        card.getList().getBoard().setName(expectedBoardName);
+
+        card.createWithDependencies();
+
+        Assertions.assertEquals(card.getName(), expectedCardName);
+        Assertions.assertEquals(card.getList().getName(), expectedListName);
+        Assertions.assertEquals(card.getList().getBoard().getName(), expectedBoardName);
+      }
 }

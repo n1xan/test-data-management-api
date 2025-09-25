@@ -19,11 +19,13 @@
         <dependency>
             <groupId>solutions.bellatrix</groupId>
             <artifactId>bellatrix.data</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
         <!-- BELLATRIX Core Module -->
         <dependency>
             <groupId>solutions.bellatrix</groupId>
             <artifactId>bellatrix.core</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
         
         <!-- JUnit 5 for testing -->

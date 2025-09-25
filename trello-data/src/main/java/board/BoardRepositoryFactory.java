@@ -1,7 +1,8 @@
 package board;
 
+import solutions.bellatrix.data.configuration.RepositoryProvider;
 import solutions.bellatrix.data.http.contracts.EntityFactory;
-import solutions.bellatrix.data.configuration.RepositoryFactory;
+import solutions.bellatrix.data.configuration.FactoryProvider;
 
 /**
  * Factory for Board entities
@@ -10,8 +11,6 @@ import solutions.bellatrix.data.configuration.RepositoryFactory;
 public class BoardRepositoryFactory implements EntityFactory<Board> {
     
     public BoardRepositoryFactory() {
-        // Register the Board repository with the factory on instantiation
-        RepositoryFactory.INSTANCE.registerRepository(Board.class, BoardRepository.class);
     }
     
     @Override
