@@ -22,7 +22,8 @@
 
     <modules>
         <module>bellatrix-java</module>
-        <module>test-data-management-module</module>
+        <module>trello-data</module>
+        <module>trello-web-tests</module>
     </modules>
 
     <dependencyManagement>
