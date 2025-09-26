@@ -12,10 +12,6 @@ import tests.trello.base.BaseTrelloTest;
 
 import java.util.stream.Collectors;
 
-/**
- * Tests demonstrating advanced factory patterns and model-centric approaches
- * for creating test data with automatic cleanup via TestDataCleanupPlugin.
- */
 @ExecutionBrowser(browser = Browser.CHROME, lifecycle = Lifecycle.RESTART_EVERY_TIME)
 public class FactoryPatternTests extends BaseTrelloTest {
 
